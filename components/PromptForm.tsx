@@ -74,32 +74,33 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
       parameters: {
         aspect_ratio: "9:16",
         subject: {
-          description: `${age}-year-old ${gender}, ${ethnicity} features, authentic appearance${customFeatures}`,
+          description: `${age}-year-old ${gender}, ${ethnicity} features, authentic casual appearance${customFeatures}`,
           expression: expression,
-          skin_texture: "hyper-detailed pores, natural blemishes, no airbrushing, subtle sweat sheen"
+          skin_texture: "visible pores, natural blemishes, uneven skin tone, no retouching"
         },
         composition: {
-          shot_type: "POV selfie video still",
-          framing: "vertical, handheld",
-          camera_angle: "slightly low angle, authentic arm-length distance"
+          shot_type: "casual phone selfie",
+          framing: "vertical, slightly off-center, imperfect framing",
+          camera_angle: "typical selfie angle, arm-length distance"
         },
         environment: {
-          setting: `${bgLabel.toLowerCase()} background, slightly out of focus`,
+          setting: `${bgLabel.toLowerCase()} background, messy and lived-in`,
           details: background,
-          depth_of_field: "f/2.8 bokeh"
+          depth_of_field: "phone camera blur, not perfect bokeh"
         },
         lighting_and_color: {
-          source: "harsh afternoon sunlight through a window",
-          effects: "volumetric dust particles, realistic facial shadows, high dynamic range",
-          color_grade: "shot on iPhone, neutral white balance, natural saturation"
+          source: "mixed indoor lighting, unflattering angles",
+          effects: "harsh shadows, slightly overexposed highlights, limited dynamic range",
+          color_grade: "phone camera auto, slightly washed out, imperfect white balance"
         },
         technical_fidelity: {
-          noise_level: "subtle digital film grain",
-          lens_artifacts: "minor lens flare, slight motion blur on hands",
-          style: "photorealistic, UGC aesthetic, 4k raw photo"
+          noise_level: "visible digital noise, especially in shadows",
+          lens_artifacts: "slight softness, phone lens distortion",
+          compression: "jpeg compression artifacts, reduced sharpness",
+          style: "amateur phone photo, authentic UGC, low-effort selfie, 1080p quality"
         }
       },
-      negative_prompt: "studio lights, airbrushed skin, CGI, 3D render, cartoon, perfect symmetry, smooth face, plastic texture, professional photography, soft box lighting"
+      negative_prompt: "studio lights, airbrushed skin, CGI, 3D render, cartoon, perfect symmetry, smooth face, plastic texture, professional photography, soft box lighting, 4K, high definition, sharp focus, perfect lighting, DSLR quality, retouched, polished, editorial"
     };
 
     return JSON.stringify(promptJson, null, 2);
