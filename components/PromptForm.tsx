@@ -61,6 +61,8 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
   const [expression, setExpression] = useState("casual, mid-sentence, natural eye contact with lens");
   const [customDetails, setCustomDetails] = useState("");
   const [showPreview, setShowPreview] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editedPrompt, setEditedPrompt] = useState("");
 
   const buildPrompt = () => {
     const customFeatures = customDetails.trim() ? `, ${customDetails.trim()}` : "";
@@ -114,9 +116,19 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isLoading) {
-      const finalPrompt = buildPrompt();
+      const finalPrompt = isEditMode ? editedPrompt : buildPrompt();
       await onSubmit(finalPrompt);
     }
+  };
+
+  const handleEnterEditMode = () => {
+    setEditedPrompt(buildPrompt());
+    setIsEditMode(true);
+    setShowPreview(true);
+  };
+
+  const handleExitEditMode = () => {
+    setIsEditMode(false);
   };
 
   return (
@@ -235,13 +247,46 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
           onClick={() => setShowPreview(!showPreview)}
           className="w-full px-3 py-2 bg-gray-50 text-left text-sm font-medium text-gray-600 hover:bg-gray-100 flex justify-between items-center"
         >
-          <span>JSON prompt preview</span>
+          <span>JSON prompt {isEditMode ? "(editing)" : "preview"}</span>
           <span className="text-gray-400">{showPreview ? "▲" : "▼"}</span>
         </button>
         {showPreview && (
-          <pre className="p-3 bg-gray-900 text-green-400 text-xs leading-relaxed max-h-60 overflow-y-auto font-mono whitespace-pre">
-            {buildPrompt()}
-          </pre>
+          <div className="relative">
+            {isEditMode ? (
+              <textarea
+                value={editedPrompt}
+                onChange={(e) => setEditedPrompt(e.target.value)}
+                disabled={isLoading}
+                className="w-full p-3 bg-gray-900 text-green-400 text-xs leading-relaxed min-h-60 font-mono resize-y focus:outline-none focus:ring-2 focus:ring-blue-500"
+                spellCheck={false}
+              />
+            ) : (
+              <pre className="p-3 bg-gray-900 text-green-400 text-xs leading-relaxed max-h-60 overflow-y-auto font-mono whitespace-pre">
+                {buildPrompt()}
+              </pre>
+            )}
+            <div className="absolute top-2 right-2 flex gap-2">
+              {isEditMode ? (
+                <button
+                  type="button"
+                  onClick={handleExitEditMode}
+                  disabled={isLoading}
+                  className="px-2 py-1 bg-gray-700 text-gray-300 text-xs rounded hover:bg-gray-600 transition-colors"
+                >
+                  Reset
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleEnterEditMode}
+                  disabled={isLoading}
+                  className="px-2 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                >
+                  Edit
+                </button>
+              )}
+            </div>
+          </div>
         )}
       </div>
 
