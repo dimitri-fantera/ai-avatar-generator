@@ -102,10 +102,14 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
           lens_artifacts: "soft focus, front camera blur, smudged lens look, barrel distortion on face edges",
           compression: "heavy jpeg artifacts, blocky compression, instagram-recompressed quality",
           resolution: "low resolution feel, 720p phone camera quality, pixelated when zoomed",
-          style: "authentic amateur selfie, real person's camera roll, not meant to be shared publicly, unflattering casual photo"
+          style: "REAL PHOTOGRAPH of a real human being, authentic amateur selfie, real person's camera roll, not meant to be shared publicly, unflattering casual photo"
+        },
+        critical: {
+          format: "THIS MUST BE A REAL PHOTOGRAPH, NOT AN ILLUSTRATION",
+          realism: "photorealistic, actual photo, real human, real skin, real environment"
         }
       },
-      negative_prompt: "professional photo, studio lighting, perfect skin, beautiful, attractive, model, influencer, good lighting, well-composed, artistic, aesthetic, filters, beauty mode, portrait mode, bokeh, sharp, high quality, 4K, HD, DSLR, mirrorless, good camera, photoshoot, glamour, retouched, edited, color corrected, good angle, flattering"
+      negative_prompt: "illustration, cartoon, animated, anime, digital art, painting, drawing, sketch, artwork, artistic rendering, CGI, 3D render, vector art, graphic design, stylized, watercolor, oil painting, professional photo, studio lighting, perfect skin, beautiful, attractive, model, influencer, good lighting, well-composed, artistic, aesthetic, filters, beauty mode, portrait mode, bokeh, sharp, high quality, 4K, HD, DSLR, mirrorless, good camera, photoshoot, glamour, retouched, edited, color corrected, good angle, flattering"
     };
 
     return JSON.stringify(promptJson, null, 2);
