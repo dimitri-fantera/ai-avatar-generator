@@ -41,6 +41,7 @@ const backgroundOptions = [
   { value: "outdoor park, trees and grass, natural daylight", label: "Park" },
   { value: "urban street, buildings and signs, city vibe", label: "Street" },
   { value: "gym, exercise equipment, mirrors", label: "Gym" },
+  { value: "grocery store aisle, shelves with products, fluorescent lighting", label: "Grocery Store" },
 ];
 
 const expressionOptions = [
