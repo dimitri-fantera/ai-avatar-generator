@@ -75,33 +75,37 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
       parameters: {
         aspect_ratio: "9:16",
         subject: {
-          description: `${age}-year-old ${gender}, ${ethnicity} features, authentic casual appearance${customFeatures}`,
+          description: `${age}-year-old ${gender}, ${ethnicity} features, average looking, not a model${customFeatures}`,
           expression: expression,
-          skin_texture: "visible pores, natural blemishes, uneven skin tone, no retouching"
+          skin_texture: "oily skin, visible pores, redness, dark circles under eyes, imperfect complexion, no makeup or minimal makeup",
+          appearance: "slightly disheveled, casual, not trying to look good"
         },
         composition: {
-          shot_type: "casual phone selfie",
-          framing: "vertical, slightly off-center, imperfect framing",
-          camera_angle: "typical selfie angle, arm-length distance"
+          shot_type: "quick front-camera selfie, taken in a hurry",
+          framing: "poorly framed, face partially cut off, awkward angle, too close or too far",
+          camera_angle: "unflattering front camera angle, slight double chin angle",
+          mistakes: "thumb slightly visible at edge, tilted horizon"
         },
         environment: {
-          setting: `${bgLabel.toLowerCase()} background, messy and lived-in`,
+          setting: `${bgLabel.toLowerCase()}, cluttered and messy background`,
           details: background,
-          depth_of_field: "phone camera blur, not perfect bokeh"
+          depth_of_field: "everything somewhat in focus, cheap phone camera, no artistic blur"
         },
         lighting_and_color: {
-          source: "mixed indoor lighting, unflattering angles",
-          effects: "harsh shadows, slightly overexposed highlights, limited dynamic range",
-          color_grade: "phone camera auto, slightly washed out, imperfect white balance"
+          source: "ugly fluorescent overhead lighting, or harsh window light from one side",
+          effects: "unflattering shadows under eyes and nose, shiny forehead, uneven lighting on face",
+          color_grade: "green/yellow color cast from indoor lights, oversaturated or undersaturated, wrong white balance",
+          exposure: "face slightly overexposed or underexposed, blown highlights on forehead"
         },
         technical_fidelity: {
-          noise_level: "visible digital noise, especially in shadows",
-          lens_artifacts: "slight softness, phone lens distortion",
-          compression: "jpeg compression artifacts, reduced sharpness",
-          style: "amateur phone photo, authentic UGC, low-effort selfie, 1080p quality"
+          noise_level: "grainy image, heavy noise in darker areas, poor low-light performance",
+          lens_artifacts: "soft focus, front camera blur, smudged lens look, barrel distortion on face edges",
+          compression: "heavy jpeg artifacts, blocky compression, instagram-recompressed quality",
+          resolution: "low resolution feel, 720p phone camera quality, pixelated when zoomed",
+          style: "authentic amateur selfie, real person's camera roll, not meant to be shared publicly, unflattering casual photo"
         }
       },
-      negative_prompt: "studio lights, airbrushed skin, CGI, 3D render, cartoon, perfect symmetry, smooth face, plastic texture, professional photography, soft box lighting, 4K, high definition, sharp focus, perfect lighting, DSLR quality, retouched, polished, editorial"
+      negative_prompt: "professional photo, studio lighting, perfect skin, beautiful, attractive, model, influencer, good lighting, well-composed, artistic, aesthetic, filters, beauty mode, portrait mode, bokeh, sharp, high quality, 4K, HD, DSLR, mirrorless, good camera, photoshoot, glamour, retouched, edited, color corrected, good angle, flattering"
     };
 
     return JSON.stringify(promptJson, null, 2);
