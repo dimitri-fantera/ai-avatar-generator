@@ -77,16 +77,17 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
       parameters: {
         aspect_ratio: "9:16",
         subject: {
-          description: `${age}-year-old ${gender}, ${ethnicity} features, average looking regular person${customFeatures}`,
+          description: `${age}-year-old ${gender}, ${ethnicity} features, interesting distinctive face, not conventionally pretty but compelling and magnetic${customFeatures}`,
           expression: expression,
           hair: "messy disheveled hair, not styled",
           skin_texture: "natural skin with visible pores, minor blemishes, slight oiliness, no makeup",
-          appearance: "casual and relaxed, not trying to look good for camera"
+          appearance: "casual and relaxed, effortlessly cool without trying",
+          presence: "someone you'd notice in a crowd, expressive eyes, authentic character in face"
         },
         composition: {
           shot_type: "casual front-camera selfie",
-          framing: "face fills most of frame, slightly off-center, forehead or chin partially cropped",
-          camera_angle: "held at eye level or slightly below, typical selfie angle"
+          framing: "face noticeably off-center, shifted left or right in frame, part of head cropped out",
+          camera_angle: "slightly tilted, imperfect handheld angle"
         },
         environment: {
           setting: `${bgLabel.toLowerCase()}`,
