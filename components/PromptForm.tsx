@@ -77,37 +77,35 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
       parameters: {
         aspect_ratio: "9:16",
         subject: {
-          description: `${age}-year-old ${gender}, ${ethnicity} features, average looking, not a model${customFeatures}`,
+          description: `${age}-year-old ${gender}, ${ethnicity} features, average looking regular person${customFeatures}`,
           expression: expression,
-          skin_texture: "oily skin, visible pores, redness, dark circles under eyes, imperfect complexion, no makeup or minimal makeup",
-          appearance: "slightly disheveled, casual, not trying to look good"
+          hair: "messy disheveled hair, not styled",
+          skin_texture: "natural skin with visible pores, minor blemishes, slight oiliness, no makeup",
+          appearance: "casual and relaxed, not trying to look good for camera"
         },
         composition: {
-          shot_type: "quick front-camera selfie, taken in a hurry",
-          framing: "poorly framed, face partially cut off, awkward angle, too close or too far",
-          camera_angle: "unflattering front camera angle, slight double chin angle",
-          mistakes: "thumb slightly visible at edge, tilted horizon"
+          shot_type: "casual front-camera selfie",
+          framing: "face fills most of frame, slightly off-center, forehead or chin partially cropped",
+          camera_angle: "held at eye level or slightly below, typical selfie angle"
         },
         environment: {
-          setting: `${bgLabel.toLowerCase()}, cluttered and messy background`,
+          setting: `${bgLabel.toLowerCase()}`,
           details: background,
-          depth_of_field: "everything somewhat in focus, cheap phone camera, no artistic blur"
+          depth_of_field: "background slightly out of focus but still recognizable, phone camera depth"
         },
         lighting_and_color: {
-          source: "ugly fluorescent overhead lighting, or harsh window light from one side",
-          effects: "unflattering shadows under eyes and nose, shiny forehead, uneven lighting on face",
-          color_grade: "green/yellow color cast from indoor lights, oversaturated or undersaturated, wrong white balance",
-          exposure: "face slightly overexposed or underexposed, blown highlights on forehead"
+          source: "ambient indoor lighting matching the environment",
+          effects: "natural shadows, slightly uneven lighting on face",
+          color_grade: "slight color cast from indoor lights, not color corrected"
         },
         technical_fidelity: {
-          noise_level: "grainy image, heavy noise in darker areas, poor low-light performance",
-          lens_artifacts: "soft focus, front camera blur, smudged lens look, barrel distortion on face edges",
-          compression: "heavy jpeg artifacts, blocky compression, instagram-recompressed quality",
-          resolution: "low resolution feel, 720p phone camera quality, pixelated when zoomed",
-          style: "authentic amateur selfie, real person's camera roll, not meant to be shared publicly, unflattering casual photo"
+          noise_level: "slight grain visible, typical smartphone low-light",
+          lens_artifacts: "soft focus typical of front camera, slight blur",
+          quality: "smartphone camera quality, authentic candid photo",
+          style: "real person's camera roll selfie, candid unplanned moment"
         }
       },
-      negative_prompt: "professional photo, studio lighting, perfect skin, beautiful, attractive, model, influencer, good lighting, well-composed, artistic, aesthetic, filters, beauty mode, portrait mode, bokeh, sharp, high quality, 4K, HD, DSLR, mirrorless, good camera, photoshoot, glamour, retouched, edited, color corrected, good angle, flattering"
+      negative_prompt: "professional photo, studio lighting, perfect skin, model, influencer, well-composed, artistic, filters, beauty mode, portrait mode, bokeh, DSLR, photoshoot, glamour, retouched, heavily edited"
     };
 
     return JSON.stringify(promptJson, null, 2);
