@@ -10,9 +10,7 @@ export async function generateImage(prompt: string): Promise<Buffer> {
     } as never,
   });
 
-  const avatarPrompt = `Generate a stylized avatar image: ${prompt}.
-    Make it visually appealing, suitable for a profile picture,
-    with good composition and vibrant colors.`;
+  const avatarPrompt = `Generate a RAW PHOTOGRAPH, real camera photo, NOT an illustration or cartoon or digital art. This must look like an actual photo taken with a phone camera. Real human, real skin texture, real environment. Photo specifications: ${prompt}`;
 
   const response = await model.generateContent(avatarPrompt);
   const parts = response.response.candidates?.[0]?.content?.parts;
