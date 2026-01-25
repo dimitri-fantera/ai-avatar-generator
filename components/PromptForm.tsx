@@ -80,7 +80,7 @@ export default function PromptForm({ onSubmit, isLoading }: PromptFormProps) {
         },
         composition: {
           shot_type: "POV selfie video still",
-          framing: "vertical, handheld, forearm visible at bottom edge",
+          framing: "vertical, handheld",
           camera_angle: "slightly low angle, authentic arm-length distance"
         },
         environment: {
