@@ -3,7 +3,12 @@ import { list } from "@vercel/blob";
 
 export async function GET() {
   try {
+    console.log("Fetching history, BLOB_READ_WRITE_TOKEN exists:", !!process.env.BLOB_READ_WRITE_TOKEN);
+
     const { blobs } = await list({ prefix: "avatars/" });
+
+    console.log("Blobs found:", blobs.length);
+    console.log("Blob pathnames:", blobs.map(b => b.pathname));
 
     const images = blobs
       .filter((blob) => blob.pathname.endsWith(".png"))
@@ -22,9 +27,14 @@ export async function GET() {
       })
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
+    console.log("Returning images:", images.length);
     return NextResponse.json({ images });
   } catch (error) {
     console.error("History fetch error:", error);
-    return NextResponse.json({ images: [] });
+    return NextResponse.json({
+      images: [],
+      error: error instanceof Error ? error.message : "Unknown error",
+      tokenExists: !!process.env.BLOB_READ_WRITE_TOKEN
+    });
   }
 }
