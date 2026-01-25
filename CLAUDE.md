@@ -1,5 +1,8 @@
 # AI Avatar Generator
 
+## Plan
+See [plan.md](./plan.md) for current status, completed work, and next steps. Always read and update plan.md when making changes.
+
 ## Overview
 Web app for generating AI image avatars using Google Gemini. First iteration toward talking AI videos.
 
