@@ -17,7 +17,7 @@ export default function PromptPage() {
 
   const fetchHistory = useCallback(async () => {
     try {
-      const res = await fetch("/api/history");
+      const res = await fetch("/api/history", { cache: "no-store" });
       if (res.ok) {
         const data = await res.json();
         setHistory(data.images);

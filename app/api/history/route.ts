@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { list } from "@vercel/blob";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   try {
     console.log("Fetching history, BLOB_READ_WRITE_TOKEN exists:", !!process.env.BLOB_READ_WRITE_TOKEN);
@@ -28,7 +30,11 @@ export async function GET() {
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
     console.log("Returning images:", images.length);
-    return NextResponse.json({ images });
+    return NextResponse.json({ images }, {
+      headers: {
+        "Cache-Control": "no-store, max-age=0",
+      },
+    });
   } catch (error) {
     console.error("History fetch error:", error);
     return NextResponse.json({
