@@ -30,6 +30,11 @@ Build a web app that generates realistic UGC-style AI avatars, as a first step t
 - [x] Imperfect framing and lighting
 - [x] Comprehensive negative prompt to avoid professional look
 
+### Simple Prompt Page
+- [x] New `/prompt` route with free-form text input
+- [x] Shared history with main avatar generator (same blob storage)
+- [x] Reuses existing Gallery component
+
 ## Next Steps
 
 ### Phase 1 Improvements
