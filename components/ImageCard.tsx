@@ -14,14 +14,19 @@ export default function ImageCard({ url, prompt, createdAt }: ImageCardProps) {
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <div className="aspect-square relative">
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block aspect-square relative cursor-pointer"
+      >
         <img
           src={url}
           alt={prompt}
           className="w-full h-full object-cover"
           loading="lazy"
         />
-      </div>
+      </a>
       <div className="p-3">
         <p className="text-sm text-gray-700 line-clamp-2" title={prompt}>
           {prompt}
