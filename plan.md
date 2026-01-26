@@ -35,6 +35,11 @@ Build a web app that generates realistic UGC-style AI avatars, as a first step t
 - [x] Shared history with main avatar generator (same blob storage)
 - [x] Reuses existing Gallery component
 
+### Gallery Improvements
+- [x] Clickable images open in new tab for saving
+- [x] Expandable "See prompt" button to view full prompt text
+- [x] Fixed history caching (force-dynamic + no-store headers)
+
 ## Next Steps
 
 ### Phase 1 Improvements
