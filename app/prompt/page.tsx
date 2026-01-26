@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Gallery from "@/components/Gallery";
+import PasswordGate from "@/components/PasswordGate";
 
 interface HistoryImage {
   url: string;
@@ -71,6 +72,7 @@ export default function PromptPage() {
       </p>
 
       <div className="max-w-2xl mx-auto mb-12">
+        <PasswordGate>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
@@ -98,6 +100,7 @@ export default function PromptPage() {
             {isLoading ? "Generating..." : "Generate Image"}
           </button>
         </form>
+        </PasswordGate>
 
         {isLoading && (
           <div className="mt-8 flex flex-col items-center">

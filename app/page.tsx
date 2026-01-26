@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import PromptForm from "@/components/PromptForm";
 import Gallery from "@/components/Gallery";
+import PasswordGate from "@/components/PasswordGate";
 
 interface HistoryImage {
   url: string;
@@ -68,7 +69,9 @@ export default function Home() {
       </p>
 
       <div className="max-w-2xl mx-auto mb-12">
-        <PromptForm onSubmit={handleGenerate} isLoading={isLoading} />
+        <PasswordGate>
+          <PromptForm onSubmit={handleGenerate} isLoading={isLoading} />
+        </PasswordGate>
 
         {isLoading && (
           <div className="mt-8 flex flex-col items-center">
