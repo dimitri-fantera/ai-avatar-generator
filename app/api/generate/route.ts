@@ -33,6 +33,15 @@ export async function POST(request: NextRequest) {
       access: "public",
       contentType: "image/png",
       addRandomSuffix: false,
+      cacheControlMaxAge: 31536000,
+    });
+
+    // Store full prompt as separate JSON metadata file
+    const metadataFilename = `avatars/${timestamp}-${sanitizedPrompt}.json`;
+    await put(metadataFilename, JSON.stringify({ prompt, createdAt: new Date().toISOString() }), {
+      access: "public",
+      contentType: "application/json",
+      addRandomSuffix: false,
     });
 
     return NextResponse.json({
