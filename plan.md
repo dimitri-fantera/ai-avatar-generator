@@ -35,10 +35,25 @@ Build a web app that generates realistic UGC-style AI avatars, as a first step t
 - [x] Shared history with main avatar generator (same blob storage)
 - [x] Reuses existing Gallery component
 
+### Reference Image Upload
+- [x] Optional image attachment on /prompt page
+- [x] Image preview with remove button
+- [x] Reference image sent to Gemini as multimodal input
+
 ### Gallery Improvements
 - [x] Clickable images open in new tab for saving
 - [x] Expandable "See prompt" button to view full prompt text
 - [x] Fixed history caching (force-dynamic + no-store headers)
+
+## Current Sprint
+
+### Active Task
+- (none)
+
+### Completed This Session
+- Task: Add optional reference image upload to /prompt page
+- Files: lib/gemini.ts, app/api/generate/route.ts, app/prompt/page.tsx
+- Status: complete
 
 ## Next Steps
 

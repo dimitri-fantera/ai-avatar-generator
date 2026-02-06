@@ -4,7 +4,7 @@ import { generateImage } from "@/lib/gemini";
 
 export async function POST(request: NextRequest) {
   try {
-    const { prompt } = await request.json();
+    const { prompt, referenceImage } = await request.json();
 
     if (!prompt || typeof prompt !== "string") {
       return NextResponse.json(
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const imageBuffer = await generateImage(prompt);
+    const imageBuffer = await generateImage(prompt, referenceImage || undefined);
 
     const timestamp = Date.now();
     const sanitizedPrompt = prompt

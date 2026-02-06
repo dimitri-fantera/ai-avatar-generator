@@ -15,6 +15,8 @@ export default function PromptPage() {
   const [history, setHistory] = useState<HistoryImage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [currentImage, setCurrentImage] = useState<HistoryImage | null>(null);
+  const [referenceImage, setReferenceImage] = useState<string | null>(null);
+  const [referencePreview, setReferencePreview] = useState<string | null>(null);
 
   const fetchHistory = useCallback(async () => {
     try {
@@ -32,6 +34,23 @@ export default function PromptPage() {
     fetchHistory();
   }, [fetchHistory]);
 
+  const handleImageAttach = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setReferenceImage(dataUrl);
+      setReferencePreview(dataUrl);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const removeReferenceImage = () => {
+    setReferenceImage(null);
+    setReferencePreview(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!prompt.trim() || isLoading) return;
@@ -43,7 +62,7 @@ export default function PromptPage() {
       const res = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: prompt.trim() }),
+        body: JSON.stringify({ prompt: prompt.trim(), referenceImage }),
       });
 
       if (!res.ok) {
@@ -90,6 +109,39 @@ export default function PromptPage() {
               rows={4}
               disabled={isLoading}
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Reference image <span className="text-gray-400">(optional)</span>
+            </label>
+            {referencePreview ? (
+              <div className="relative inline-block">
+                <img
+                  src={referencePreview}
+                  alt="Reference"
+                  className="h-24 rounded-lg border border-gray-300 object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={removeReferenceImage}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+                >
+                  x
+                </button>
+              </div>
+            ) : (
+              <label className="flex items-center justify-center w-full h-20 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-blue-400 transition-colors">
+                <span className="text-sm text-gray-500">Click to attach an image</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageAttach}
+                  className="hidden"
+                  disabled={isLoading}
+                />
+              </label>
+            )}
           </div>
 
           <button
