@@ -34,16 +34,32 @@ export default function PromptPage() {
     fetchHistory();
   }, [fetchHistory]);
 
-  const handleImageAttach = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const resizeImage = (file: File, maxSize: number): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let { width, height } = img;
+        if (width > maxSize || height > maxSize) {
+          const ratio = Math.min(maxSize / width, maxSize / height);
+          width = Math.round(width * ratio);
+          height = Math.round(height * ratio);
+        }
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d")!.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
+      };
+      img.src = URL.createObjectURL(file);
+    });
+  };
+
+  const handleImageAttach = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      const dataUrl = reader.result as string;
-      setReferenceImage(dataUrl);
-      setReferencePreview(dataUrl);
-    };
-    reader.readAsDataURL(file);
+    const dataUrl = await resizeImage(file, 1024);
+    setReferenceImage(dataUrl);
+    setReferencePreview(dataUrl);
   };
 
   const removeReferenceImage = () => {
@@ -66,8 +82,14 @@ export default function PromptPage() {
       });
 
       if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to generate image");
+        let message = "Failed to generate image";
+        try {
+          const error = await res.json();
+          message = error.error || message;
+        } catch {
+          if (res.status === 413) message = "Image too large. Try a smaller file.";
+        }
+        throw new Error(message);
       }
 
       const data = await res.json();
