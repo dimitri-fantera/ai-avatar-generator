@@ -4,7 +4,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_AI_API_KEY || "");
 
 export async function generateImage(prompt: string, referenceImage?: string): Promise<Buffer> {
   const model = genAI.getGenerativeModel({
-    model: "gemini-3-pro-image-preview",
+    model: "gemini-3.1-flash-image-preview",
     generationConfig: {
       responseModalities: ["Text", "Image"],
     } as never,
